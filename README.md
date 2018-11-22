@@ -1,4 +1,6 @@
 # urlChecker
+[![Python 3.6|3.7](https://img.shields.io/badge/python-3.6%7C3.7-blue.svg)](https://www.python.org/)
+
 Faster url checker for check domains into valid
 Use after parse domains from subdomains finder (for example: https://github.com/lijiejie/subDomainsBrute)
 # This soft can:
@@ -9,4 +11,4 @@ Use after parse domains from subdomains finder (for example: https://github.com/
 # Required
 requests
 urllib3
-Python 3
+Python 3.6 or 3.7
