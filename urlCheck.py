@@ -28,12 +28,12 @@ def fetch_url(url):
         return None, None, None
 
 
-def sendRequests(threads, output):
+def sendRequests(threads, output, lenght, code):
     print('Started')
     results = ThreadPool(threads).imap_unordered(fetch_url, urls)
     for url, response, error in results:
         if (response) and (results):
-            if response.status_code == 200 and len(response.text) > 10:
+            if response.status_code == code and len(response.text) > lenght:
                 proc = len(urls)/100
                 progr = i/proc
                 print(f"\rProgress: {round(progr)}%\r", end="")
@@ -53,9 +53,13 @@ if __name__ == '__main__':
                         help='Count of threads')
     parser.add_argument('-o', '--output', type=str, default='results.txt',
                         help='File for output', required=False)
+    parser.add_argument('-l', '--lenght', type=int, default='50',
+                        help='Minimal lenght of html', required=False)
+    parser.add_argument('-c', '--code', type=int, default='200',
+                        help='Status code which valid', required=False)
     args = parser.parse_args()
 
     for url in open(args.domains):
         urls.append('https://' + url.strip())
     print('Loaded: '+str(len(urls))+' urls.')
-    sendRequests(args.threads, args.output)
+    sendRequests(args.threads, args.output, args.lenght, args.code)
